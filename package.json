@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/parduccinward/ioet-schedules-exercise/issues"
   },
-  "homepage": "https://github.com/parduccinward/ioet-schedules-exercise#readme"
+  "homepage": "https://github.com/parduccinward/ioet-schedules-exercise#readme",
+  "dependencies": {
+    "jest": "^29.2.2"
+  }
 }
