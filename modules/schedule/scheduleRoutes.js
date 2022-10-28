@@ -1,10 +1,10 @@
 /*
 pseudocode
 
-Routes
+Router Layer
 
-1. Import schedule index
-2. Use app 
+1. Create route app.get('/coincidences')
+2. trycatch connection
 3. Create coincidences variable = schedule.scheduleService.getSchedulesCoincidences
 4. res.json variable
 
