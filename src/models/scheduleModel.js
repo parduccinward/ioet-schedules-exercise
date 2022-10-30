@@ -1,6 +1,8 @@
+import retrieveData from "../utils/retrieveData.js";
 const scheduleModel ={
     getSchedules: () => {
-        console.log("This is the database")
+        const schedules = retrieveData();
+        console.log(schedules);
     }
 }
 export default scheduleModel;
