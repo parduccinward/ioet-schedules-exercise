@@ -1,7 +1,8 @@
-import * as fs from 'fs';
-const retrieveData = () => {
+import {readFile} from 'fs/promises';
+
+const retrieveData = async () => {
     try {
-        let data = fs.readFileSync('./src/database/data.txt', 'utf8');
+        const data = await readFile(process.cwd()+'/src/database/data.txt', 'utf8')
         return data.toString();
     } catch(e) {
         console.log('Error:', e.stack);

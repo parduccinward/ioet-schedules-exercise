@@ -1,7 +1,7 @@
 import retrieveData from "../utils/retrieveData.js";
 const scheduleModel ={
-    getSchedules: () => {
-        const schedules = retrieveData();
+    getSchedules: async () => {
+        const schedules = await retrieveData();
         console.log(schedules);
     }
 }
