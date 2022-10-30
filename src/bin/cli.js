@@ -1,4 +1,5 @@
+import scheduleService from "../services/scheduleService.js";
 const cli = () =>{
-    console.log('ASTRID-RENE: 2\n'+'ASTRID-ANDRES: 3\n'+'RENE-ANDRES: 2\n');
+    scheduleService.getWorkingHours();
 }
 export default cli;
