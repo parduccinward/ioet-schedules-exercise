@@ -20,33 +20,33 @@ describe('Create an array of employee schedules', () => {
         expect(consoleSpy).toHaveBeenCalledWith('ASTRID');
         expect(consoleSpy).toHaveBeenCalledWith('ANDRES');
     })
-    test('get schedule week for employee 1', () => {
+    test.skip('get schedule week for employee 1', () => {
         let week={
-            mon:{
+            MO:{
                 start:"10:00",
                 end:"12:00"
             },
-            tue:{
+            TU:{
                 start:"10:00",
                 end:"12:00"
             },
-            wed:{
+            WE:{
                 start:"",
                 end:""
             },
-            thu:{
+            TH:{
                 start:"01:00",
                 end:"03:00"
             },
-            fri:{
+            FR:{
                 start:"",
                 end:""
             },
-            sat:{
+            SA:{
                 start:"14:00",
                 end:"18:00"
             },
-            sun:{
+            SU:{
                 start:"20:00",
                 end:"21:00"
             }

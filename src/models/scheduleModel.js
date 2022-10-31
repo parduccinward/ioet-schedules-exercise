@@ -4,7 +4,7 @@ const scheduleModel ={
     getSchedules: async () => {
         const data = await retrieveData();
         const employeeSchedules = createSchedules(data);
-
+        employeeSchedules.forEach(schedule => console.log(schedule.getWeek()));
     }
 }
 export default scheduleModel;
