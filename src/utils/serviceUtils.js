@@ -1,6 +1,6 @@
 const serviceUtils = {
     calculateCoincidences: (scheduleOne, scheduleTwo) => {
-        console.log("boenas")
+        console.log(scheduleOne, scheduleTwo);
     }
 }
 export default serviceUtils;
