@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "type": "module",
   "bin": {
-    "hours": "./src/index.js"
+    "coincidences": "./src/index.js"
   },
   "scripts": {
     "test": "jest"

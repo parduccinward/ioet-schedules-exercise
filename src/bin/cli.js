@@ -1,5 +1,5 @@
 import scheduleService from "../services/scheduleService.js";
 const cli = () =>{
-    scheduleService.getWorkingHours();
+    scheduleService.getWorkingCoincidences();
 }
 export default cli;

@@ -1,6 +1,6 @@
 import cli from '../bin/cli';
 
-describe('Integration test shared hours', () => {
+describe('Integration test for working coincidences', () => {
     test('Example 1', () => {
         const consoleSpy = jest.spyOn(console, 'log');
         cli();
