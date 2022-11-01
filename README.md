@@ -168,7 +168,7 @@ describe('Calculate coincidences between a couple of working schedules', () => {
     })
 })
 ```
-> /src/utils/serviceUtils.js
+> /src/tests/calculateCoincidences.test.js
 
 ## Getting started
 
