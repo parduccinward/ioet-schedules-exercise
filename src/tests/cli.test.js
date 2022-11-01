@@ -9,6 +9,6 @@ describe('Integration test for working coincidences', () => {
     test.skip('Example 2', async () => {
         const consoleSpy = jest.spyOn(console, 'log');
         await cli();
-        expect(consoleSpy).toHaveBeenCalledWith('RENE-ASTRID: 3\n');
+        expect(consoleSpy).toHaveBeenCalledWith('RENE-ASTRID:3\n');
     })
 })
