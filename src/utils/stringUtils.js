@@ -30,9 +30,20 @@ const stringUtils ={
         let array = text.split('-');
         const hours = {
             start:array[0],
-            end:array[array.length - 1]
+            end:array[array.length-1]
         }
         return hours;
+    },
+    formatHourAndMinutes: (start,end) => {
+        let startTime = start.split(':');
+        let endTime = end.split(':');
+        const time = {
+            startHour: startTime[0],
+            startMin: startTime[startTime.length-1],
+            endHour: endTime[0],
+            endMin: endTime[endTime.length-1]
+        }
+        return time;
     }
 }
 export default stringUtils;

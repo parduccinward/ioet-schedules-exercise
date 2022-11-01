@@ -90,6 +90,26 @@ const exclusiveTestSchedule2 = {
     SU: { start: '', end: '' }
 }
 
+const workingAtNight1 = {
+    MO: { start: '05:00', end: '07:00' },
+    TU: { start: '', end: '' },
+    WE: { start: '', end: '' },
+    TH: { start: '', end: '' },
+    FR: { start: '', end: '' },
+    SA: { start: '', end: '' },
+    SU: { start: '', end: '' }
+}
+
+const workingAtNight2 = {
+    MO: { start: '22:00', end: '06:00' },
+    TU: { start: '', end: '' },
+    WE: { start: '', end: '' },
+    TH: { start: '', end: '' },
+    FR: { start: '', end: '' },
+    SA: { start: '', end: '' },
+    SU: { start: '', end: '' }
+}
+
 describe('Calculate coincidences between a couple of working schedules', () => {
     test("Astrid-Rene test Ex:1", () => {
         expect(serviceUtils.calculateCoincidences(astridScheduleEx1,reneScheduleEx1)).toBe(2);
@@ -108,6 +128,9 @@ describe('Calculate coincidences between a couple of working schedules', () => {
     })
     test("Exclusive coincidence, one arriving the other lefting", () => {
         expect(serviceUtils.calculateCoincidences(exclusiveTestSchedule1,exclusiveTestSchedule2)).toBe(0);
+    })
+    test("Working at night", () => {
+        expect(serviceUtils.calculateCoincidences(workingAtNight1,workingAtNight2)).toBe(1);
     })
 })
 
