@@ -1,6 +1,6 @@
 # Ioet Schedule Exercise
 ## Overview
-This project allows you to effectively manage the number of coincidences between your worker's schedules. The main processes are subtracting data from a .txt file, calculating the number of coincidences, and returning the data to the <a href="https://en.wikipedia.org/wiki/Command-line_interface">CLI</a>. The technologies used to carry out this project are Javascript and <a href="https://nodejs.org/en/about/">Node.js</a> for development and <a href="https://jestjs.io/">Jest</a> for testing. Also, I applied the n-tier layered architecture and a <a href="https://www.freecodecamp.org/news/an-introduction-to-test-driven-development-c4de6dce5c/">TDD</a> methodology for reusability and readibility.
+This project allows you to effectively manage the number of coincidences between your worker's schedules. The main processes are subtracting data from a .txt file, calculating the number of coincidences, and returning the data to the <a href="https://en.wikipedia.org/wiki/Command-line_interface">CLI</a>. The technologies used to carry out this project are Javascript and <a href="https://nodejs.org/en/about/">Node.js</a> for development and <a href="https://jestjs.io/">Jest</a> for testing. Also, I applied the n-tier layered architecture and a <a href="https://www.freecodecamp.org/news/an-introduction-to-test-driven-development-c4de6dce5c/">TDD</a> methodology for reusability and readability.
 ## Q/A
 
 ### How was this project carried out?
@@ -18,7 +18,7 @@ The first part was about understanding the problem. Knowing what we want to achi
     - Draw an object diagram
 
 2. Development
-    - Create GitHub repository
+    - Create a GitHub repository
     - Create the architecture folder structure
     - Write necessary pseudocode
     - Install test-running system
@@ -29,7 +29,7 @@ The first part was about understanding the problem. Knowing what we want to achi
     - Create entities
     - Create utils
     - Refactor code
-    - Write integration test
+    - Write an integration test
 
 3. Documentation
     - Write a paragraph about the project
