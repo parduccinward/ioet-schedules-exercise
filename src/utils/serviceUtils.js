@@ -6,17 +6,18 @@ const serviceUtils = {
             if(serviceUtils.checkBothWorkingInADay(value, scheduleTwo, key)){
                 let timeOne = stringUtils.formatHourAndMinutes(value.start,value.end);
                 let timeTwo = stringUtils.formatHourAndMinutes(scheduleTwo[key].start,scheduleTwo[key].end);
-                if(serviceUtils.checkTimeOneIsAlwaysLesser(timeOne,timeTwo)){
-                    [timeOne,timeTwo] = serviceUtils.exchangeTimeValues(timeOne, timeTwo);
+                if(serviceUtils.checkPastMidnightWork(timeOne,timeTwo)){
+                    if(timeOne.startHour>timeOne.endHour){
+                        [timeOne,timeTwo] = serviceUtils.exchangeTimeValues(timeOne, timeTwo);
+                    }
+                    if(serviceUtils.checkHoursInRangePastMidnight(timeOne,timeTwo)) coincidences++;
+                }else{
+                    if(serviceUtils.checkTimeOneIsAlwaysLesser(timeOne,timeTwo)){
+                        [timeOne,timeTwo] = serviceUtils.exchangeTimeValues(timeOne, timeTwo);
+                    }
+                    if(serviceUtils.checkHoursMatch(timeOne, timeTwo))coincidences++;
+                    else if(serviceUtils.checkHoursInRange(timeOne, timeTwo))coincidences++;
                 }
-                if(serviceUtils.checkHoursMatch(timeOne, timeTwo)){
-                    coincidences++;
-                }else if(serviceUtils.checkHoursInRange(timeOne, timeTwo)){
-                    coincidences++;
-                }
-                console.log(timeOne);
-                console.log(timeTwo);
-                console.log(coincidences);
             }
         }
         return coincidences;
@@ -36,9 +37,18 @@ const serviceUtils = {
         timeOne.startMin===timeTwo.startMin && 
         timeOne.endMin===timeTwo.endMin;
     },
+    checkPastMidnightWork: (timeOne, timeTwo) => {
+        return (timeOne.startHour>timeOne.endHour) || (timeTwo.startHour>timeTwo.endHour)
+    },
     checkHoursInRange: (timeOne, timeTwo) => {
         return timeOne.startHour<=timeTwo.startHour &&
         timeOne.endHour > timeTwo.startHour;
+    },
+    checkHoursInRangePastMidnight: (timeOne, timeTwo) => {
+        return (timeOne.startHour<=timeTwo.endHour && 
+        timeTwo.endHour<timeOne.endHour) || 
+        (timeOne.startHour<timeTwo.startHour && 
+        timeTwo.startHour<=timeOne.endHour);
     },
     exchangeTimeValues: (timeOne, timeTwo) => {
         [timeOne, timeTwo] = [timeTwo, timeOne]

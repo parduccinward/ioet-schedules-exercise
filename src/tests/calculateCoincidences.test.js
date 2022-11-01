@@ -90,7 +90,7 @@ const exclusiveTestSchedule2 = {
     SU: { start: '', end: '' }
 }
 
-const workingAtNight1 = {
+const pastMidnightWork1 = {
     MO: { start: '05:00', end: '07:00' },
     TU: { start: '', end: '' },
     WE: { start: '', end: '' },
@@ -100,7 +100,7 @@ const workingAtNight1 = {
     SU: { start: '', end: '' }
 }
 
-const workingAtNight2 = {
+const pastMidnightWork2 = {
     MO: { start: '22:00', end: '06:00' },
     TU: { start: '', end: '' },
     WE: { start: '', end: '' },
@@ -129,8 +129,8 @@ describe('Calculate coincidences between a couple of working schedules', () => {
     test("Exclusive coincidence, one arriving the other lefting", () => {
         expect(serviceUtils.calculateCoincidences(exclusiveTestSchedule1,exclusiveTestSchedule2)).toBe(0);
     })
-    test("Working at night", () => {
-        expect(serviceUtils.calculateCoincidences(workingAtNight1,workingAtNight2)).toBe(1);
+    test("Check past midnight work", () => {
+        expect(serviceUtils.calculateCoincidences(pastMidnightWork1, pastMidnightWork2)).toBe(1);
     })
 })
 
