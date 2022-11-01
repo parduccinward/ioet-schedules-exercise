@@ -51,10 +51,124 @@ There are some elements that I took into consideration when choosing an appropri
 3. Data Access Layer: This layer is for handling data. I used this layer to access the data and put it in the correct format. For this, I have relied on the creation of a model. If we wanted to extend our project, we could create more actions within this layer, such as updating the txt file, inserting data, etc.
 ## Development
 
-Parrafo
+I applied the TDD methodology, creating tests before coding each module in my application. It's a good practice to separate code into different units and isolate them. Also, I wrote unit and integration tests using Jest because it has a lot of support. Doing this it's easier if you use developer patterns, so you divide your code into different components. I have chosen module patterns with the imports/exports ES6 Javascript syntax for this project. Finally, I have relied on folders such as Utils, where I put reusable functions, and Entities, where I created isolated files for creating objects.
 
-Codigo mas importante y su respectiva prueba
-Mencion de utils y entities
+### Solution
+
+The solution for this problem is by utilizing an object called Schedule, for storing the employee schedule:
+
+```js
+import stringUtils from '../utils/stringUtils.js'
+const Schedule = (string) => {
+    let name= stringUtils.getRowName(string);
+    let week={
+       ...
+    }
+    const getName = () => name;
+    const getWeek = () => week;
+
+    const getHours = (day) => {
+        const hours = stringUtils.getHourRange(string, day);
+        return stringUtils.getStartAndEndHours(hours);
+    }
+    const getAllDays = () => {
+        return Object.keys(week);
+    }
+    const populateWeek = () => {
+        const days = getAllDays();
+        days.forEach((day) => {
+            if(isTheDayInSchedule(day)===true){
+                const hours = getHours(day);
+                week[day].start = hours.start;
+                week[day].end = hours.end;
+            }
+        })
+    }
+    const isTheDayInSchedule = (day) => {
+        return (stringUtils.findDay(string, day)) ? true : false;
+    }
+    populateWeek();
+    return {getName, getWeek}
+}
+export default Schedule;
+```
+
+> /src/entities/Schedule.js
+
+I populated this object using String.prototype methods such as split, slice, indexOf, etc. These functions are necessary to manage the string and get the information contained in the .txt file. Then, I have grouped these objects in pairs into a new object called EmployeeCouple:
+
+```js
+const EmployeeCouple = (employeeOne, employeeTwo) => {
+    let coincidences = serviceUtils.calculateCoincidences(employeeOne.getWeek(), employeeTwo.getWeek());
+
+    const getEmployeeOneName = () => employeeOne.getName();
+    const getEmployeeTwoName = () => employeeTwo.getName();
+
+    const getCoincidences = () => coincidences;
+
+    return {getEmployeeOneName, getEmployeeTwoName, getCoincidences};
+}
+export default EmployeeCouple;
+```
+> /src/entities/EmployeeCouple.js
+
+This object has a variable called coincidences, which uses a function called calculateCoincidences() that is located on serviceUtils.
+
+
+```js
+    calculateCoincidences: (scheduleOne, scheduleTwo) => {
+        let coincidences=0;
+        for (const [key, value] of Object.entries(scheduleOne)){
+            if(serviceUtils.checkBothWorkingInADay(value, scheduleTwo, key)){
+                let timeOne = stringUtils.formatHourAndMinutes(value.start,value.end);
+                let timeTwo = stringUtils.formatHourAndMinutes(scheduleTwo[key].start,scheduleTwo[key].end);
+                if(serviceUtils.checkPastMidnightWork(timeOne,timeTwo)){
+                    if(timeOne.startHour>timeOne.endHour){
+                        [timeOne,timeTwo] = serviceUtils.exchangeTimeValues(timeOne, timeTwo);
+                    }
+                    if(serviceUtils.checkHoursInRangePastMidnight(timeOne,timeTwo)) coincidences++;
+                }else{
+                    if(serviceUtils.checkTimeOneIsAlwaysLesser(timeOne,timeTwo)){
+                        [timeOne,timeTwo] = serviceUtils.exchangeTimeValues(timeOne, timeTwo);
+                    }
+                    if(serviceUtils.checkHoursMatch(timeOne, timeTwo))coincidences++;
+                    else if(serviceUtils.checkHoursInRange(timeOne, timeTwo))coincidences++;
+                }
+            }
+        }
+        return coincidences;
+    }
+```
+> /src/utils/serviceUtils.js
+
+This function takes as input the weekly schedules of two employees, and depending on the case, it will be taken into account that the employees coincidence at work. This function uses conditionals built as functions like checkHoursMatch(), checkHoursInRange(), and checkPastMidnightWork() that compares both schedules and checks for the hours and the minutes each day. For testing this function I created fakeData that simulated .txt file data, and using Jest I implemented the following test:
+
+```js
+describe('Calculate coincidences between a couple of working schedules', () => {
+    test("Astrid-Rene test Ex:1", () => {
+        expect(serviceUtils.calculateCoincidences(astridScheduleEx1,reneScheduleEx1)).toBe(2);
+    })
+    test("Astrid-Andres test Ex:1", () => {
+        expect(serviceUtils.calculateCoincidences(astridScheduleEx1,andresScheduleEx1)).toBe(3);
+    })
+    test("Rene-Andres test Ex:1", () => {
+        expect(serviceUtils.calculateCoincidences(reneScheduleEx1,andresScheduleEx1)).toBe(2);
+    })
+    test("Astrid-Rene test Ex:2", () => {
+        expect(serviceUtils.calculateCoincidences(astridScheduleEx2,reneScheduleEx2)).toBe(3);
+    })
+    test("Coincidence by one minute", () => {
+        expect(serviceUtils.calculateCoincidences(oneMinTestSchedule1,oneMinTestSchedule2)).toBe(1);
+    })
+    test("Exclusive coincidence, one arriving the other lefting", () => {
+        expect(serviceUtils.calculateCoincidences(exclusiveTestSchedule1,exclusiveTestSchedule2)).toBe(0);
+    })
+    test("Check past midnight work", () => {
+        expect(serviceUtils.calculateCoincidences(pastMidnightWork1, pastMidnightWork2)).toBe(1);
+    })
+})
+```
+> /src/utils/serviceUtils.js
 
 ## Getting started
 
